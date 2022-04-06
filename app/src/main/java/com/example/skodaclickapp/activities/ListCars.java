@@ -1,7 +1,9 @@
 package com.example.skodaclickapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -30,11 +32,18 @@ public class ListCars extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_cars);
         hideTitle();
-
+        ImageButton backButton = findViewById(R.id.backImageButton);
+        backButton.setOnClickListener(view -> openMainActivity());
         recyclerView = findViewById(R.id.carListView);
         readData();
         setAdapter();
     }
+
+    private void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
     private void setAdapter() {
         RecyclerAdapter adapter = new RecyclerAdapter(cars);
