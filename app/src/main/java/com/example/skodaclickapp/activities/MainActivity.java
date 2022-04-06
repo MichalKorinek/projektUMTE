@@ -21,8 +21,15 @@ public class MainActivity extends AppCompatActivity {
         ImageButton listCars = findViewById(R.id.listCars);
         listCars.setOnClickListener(view -> openListCarsActivity());
 
+        ImageButton permissions = findViewById(R.id.permissions);
+        permissions.setOnClickListener(view -> openSettings());
+
     }
 
+    private void openSettings() {
+        Intent intent = new Intent(this, SettingsAndPermissions.class);
+        startActivity(intent);
+    }
 
     private void openListCarsActivity() {
         Intent intent = new Intent(this, ListCars.class);

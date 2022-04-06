@@ -14,9 +14,17 @@ import android.widget.TextView;
 import com.example.skodaclickapp.R;
 import com.example.skodaclickapp.ReadCsvData;
 import com.example.skodaclickapp.model.Car;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Objects;
 
 public class DetailOfCar extends AppCompatActivity {
@@ -36,6 +44,7 @@ public class DetailOfCar extends AppCompatActivity {
         }
         ImageButton imageButton = findViewById(R.id.detailImageButton);
         imageButton.setOnClickListener(view -> openListCarsActivity());
+
 
     }
 
@@ -101,12 +110,18 @@ public class DetailOfCar extends AppCompatActivity {
         TextView colorDetail = findViewById(R.id.colorDetail);
         colorDetail.setText("Barva vozu: " + car.getColor());
 
+    }
+    /*
+    private void saveFile() throws IOException, CsvException {
+        InputStreamReader isr = new InputStreamReader(this.getResources().openRawResource(R.raw.data));
+        CSVReader csvReader = new CSVReader(isr);
+        List<String[]> allData = csvReader.readAll();
 
-
-
-
+        //CSVWriter csvWriter = new CSVWriter(new FileWriter())
 
     }
+
+     */
 
     private void openListCarsActivity() {
         Intent intent = new Intent(this, ListCars.class);

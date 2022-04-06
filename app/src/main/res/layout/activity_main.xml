@@ -23,10 +23,10 @@
         android:layout_width="62dp"
         android:layout_height="62dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/permissions"
+        app:layout_constraintTop_toBottomOf="@+id/scanQR"
         app:srcCompat="?android:attr/actionModeFindDrawable" />
 
     <ImageButton
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:text="Scan QR Code"
+        android:text="Naskenovat QR kód"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.028"
         app:layout_constraintStart_toEndOf="@+id/scanQR"
@@ -55,33 +55,31 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="List all cars"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="48dp"
+        android:text="Výpis všech automobilů"
         app:layout_constraintStart_toEndOf="@+id/listCars"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Permissions and Settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="56dp"
+        android:text="Nastavení | Práva"
         app:layout_constraintStart_toEndOf="@+id/permissions"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <ImageButton
         android:id="@+id/permissions"
         android:layout_width="62dp"
         android:layout_height="62dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanQR"
+        app:layout_constraintTop_toBottomOf="@+id/listCars"
         app:srcCompat="@android:drawable/ic_menu_preferences" />
 
     <TextView
