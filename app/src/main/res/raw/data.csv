@@ -1,13 +1,13 @@
 carNumber;type;color;SPZ;fuel;description;fuelCard
-1;Scala;red;5206;0.46;;54
+1;Scala;red;5206;0.46;Poskrabany volant;54
 4;Scala;white;4975;0.98;;65
-10;Scala;blue;5216;0.85;missing sticker on doors;30
+10;Scala;blue;5216;0.85;Missing sticker on doors;30
 16;KamiQ;black;5285;1.00;;58
 46;KamiQ;red;5274;1.00;;24
 50;Scala;blue;5181;1.00;;75
 56;Octavia;blue;7909;1.00;;57
 62;Octavia;green;1853;0.56;;63
-80;Octavia;white;1759;1.00;damaged steerwheel;50
+80;Octavia;white;1759;1.00;Damaged steerwheel;50
 81;Octavia;grey;3287;1.00;;34
 88;Octavia;grey;8805;0.74;;23
 90;Octavia;grey;7713;1.00;;27

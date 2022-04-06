@@ -1,17 +1,21 @@
 package com.example.skodaclickapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skodaclickapp.activities.MainActivity;
+import com.example.skodaclickapp.listeners.DetailClickListener;
 import com.example.skodaclickapp.model.Car;
 
 import java.util.List;
@@ -19,9 +23,11 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
     private List<Car> cars;
+    private DetailClickListener detailClickListener;
 
-    public RecyclerAdapter(List<Car> cars) {
+    public RecyclerAdapter(List<Car> cars, DetailClickListener detailClickListener) {
         this.cars = cars;
+        this.detailClickListener = detailClickListener;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -30,7 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         private TextView typeOfCar;
         private TextView fuelOfCar;
         private ImageView imageView;
-        private ConstraintLayout constraintLayout;
+        private ImageButton imageButton;
 
         public MyViewHolder(final View view) {
             super(view);
@@ -39,8 +45,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             typeOfCar = view.findViewById(R.id.typeOfCar);
             fuelOfCar = view.findViewById(R.id.fuelOfCar);
             imageView = view.findViewById(R.id.imageView3);
+            imageButton = view.findViewById(R.id.moreInfoBtn);
+
         }
+
+
     }
+
 
     @NonNull
     @Override
@@ -52,7 +63,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
-
         holder.carId.setText("" + cars.get(position).getId());
         holder.carSpz.setText(cars.get(position).getSpz());
         holder.typeOfCar.setText(cars.get(position).getType());
@@ -99,7 +109,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         }
 
+        holder.imageButton.setOnClickListener(view -> detailClickListener.onDetailClick(cars.get(position).getId()));
+
     }
+
+
 
     @Override
     public int getItemCount() {

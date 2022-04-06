@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SkodaClickApp">
         <activity
+            android:name=".activities.DetailOfCar"
+            android:exported="false" />
+        <activity
             android:name=".activities.ListCars"
             android:exported="false" />
         <activity
@@ -21,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

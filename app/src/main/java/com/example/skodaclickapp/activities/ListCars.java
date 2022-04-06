@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.skodaclickapp.R;
 import com.example.skodaclickapp.ReadCsvData;
 import com.example.skodaclickapp.RecyclerAdapter;
+import com.example.skodaclickapp.listeners.DetailClickListener;
 import com.example.skodaclickapp.model.Car;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
-public class ListCars extends AppCompatActivity {
+public class ListCars extends AppCompatActivity implements DetailClickListener {
 
 
     private List<Car> cars;
@@ -46,7 +47,7 @@ public class ListCars extends AppCompatActivity {
 
 
     private void setAdapter() {
-        RecyclerAdapter adapter = new RecyclerAdapter(cars);
+        RecyclerAdapter adapter = new RecyclerAdapter(cars, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -65,5 +66,13 @@ public class ListCars extends AppCompatActivity {
     private void hideTitle(){
         Objects.requireNonNull(getSupportActionBar()).hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    @Override
+    public void onDetailClick(int id) {
+        Intent intent = new Intent(this, DetailOfCar.class);
+        String idString = id + "";
+        intent.putExtra("id", idString);
+        startActivity(intent);
     }
 }
