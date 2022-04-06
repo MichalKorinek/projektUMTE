@@ -1,14 +1,16 @@
 package com.example.skodaclickapp.activities;
 
 import android.os.Bundle;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skodaclickapp.R;
 import com.example.skodaclickapp.ReadCsvData;
+import com.example.skodaclickapp.RecyclerAdapter;
 import com.example.skodaclickapp.model.Car;
 
 import java.io.IOException;
@@ -21,14 +23,25 @@ public class ListCars extends AppCompatActivity {
 
     private List<Car> cars;
     private final ReadCsvData readCsvData = new ReadCsvData();
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_cars);
         hideTitle();
+
+        recyclerView = findViewById(R.id.carListView);
         readData();
-        setText();
+        setAdapter();
+    }
+
+    private void setAdapter() {
+        RecyclerAdapter adapter = new RecyclerAdapter(cars);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
     }
 
     private void readData(){
@@ -38,15 +51,6 @@ public class ListCars extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void setText() {
-        TextView textView = findViewById(R.id.csvTest);
-        String text = "";
-        for (int i = 0; i < cars.size(); i++) {
-            text += cars.get(i).toString();
-        }
-        textView.setText(text);
     }
 
     private void hideTitle(){
