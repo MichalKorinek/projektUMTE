@@ -1,30 +1,25 @@
 package com.example.skodaclickapp.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.skodaclickapp.R;
 import com.example.skodaclickapp.ReadCsvData;
 import com.example.skodaclickapp.model.Car;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
-import com.opencsv.exceptions.CsvException;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.List;
 import java.util.Objects;
 
 public class DetailOfCar extends AppCompatActivity {
@@ -52,7 +47,14 @@ public class DetailOfCar extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void readData(String id) throws IOException {
-        InputStream is = this.getResources().openRawResource(R.raw.data);
+        int dataFile = 0;
+        File[] file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).listFiles();
+        for (int i = 0; i < file.length; i++) {
+            if(file[i].getName().equals("data")){
+                dataFile = i;
+            }
+        }
+        InputStream is = new FileInputStream(file[dataFile]);
         ReadCsvData readCsvData = new ReadCsvData();
         Car car = readCsvData.readDataById(is, id);
 

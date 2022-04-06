@@ -2,6 +2,8 @@ package com.example.skodaclickapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 
@@ -16,8 +18,13 @@ import com.example.skodaclickapp.RecyclerAdapter;
 import com.example.skodaclickapp.listeners.DetailClickListener;
 import com.example.skodaclickapp.model.Car;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,7 +43,11 @@ public class ListCars extends AppCompatActivity implements DetailClickListener {
         ImageButton backButton = findViewById(R.id.backImageButton);
         backButton.setOnClickListener(view -> openMainActivity());
         recyclerView = findViewById(R.id.carListView);
-        readData();
+        try {
+            readData();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         setAdapter();
     }
 
@@ -54,14 +65,23 @@ public class ListCars extends AppCompatActivity implements DetailClickListener {
         recyclerView.setAdapter(adapter);
     }
 
-    private void readData(){
-        InputStream is = this.getResources().openRawResource(R.raw.data);
+    private void readData() throws FileNotFoundException {
+        int dataFile = 0;
+        File[] file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).listFiles();
+        for (int i = 0; i < file.length; i++) {
+            if(file[i].getName().equals("data")){
+                dataFile = i;
+            }
+        }
+        InputStream is = new FileInputStream(file[dataFile]);
         try {
             cars = readCsvData.readData(is);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     private void hideTitle(){
         Objects.requireNonNull(getSupportActionBar()).hide();
