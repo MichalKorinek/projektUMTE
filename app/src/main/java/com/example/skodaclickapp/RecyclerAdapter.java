@@ -1,6 +1,7 @@
 package com.example.skodaclickapp;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skodaclickapp.model.Car;
@@ -28,6 +30,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         private TextView typeOfCar;
         private TextView fuelOfCar;
         private ImageView imageView;
+        private ConstraintLayout constraintLayout;
 
         public MyViewHolder(final View view) {
             super(view);
@@ -36,7 +39,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             typeOfCar = view.findViewById(R.id.typeOfCar);
             fuelOfCar = view.findViewById(R.id.fuelOfCar);
             imageView = view.findViewById(R.id.imageView3);
-
         }
     }
 
@@ -55,6 +57,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.carSpz.setText(cars.get(position).getSpz());
         holder.typeOfCar.setText(cars.get(position).getType());
         holder.fuelOfCar.setText((cars.get(position).getFuel() * 100) + "%");
+        if(cars.get(position).getFuel() < 0.35){
+            holder.fuelOfCar.setTextColor(Color.rgb(255,0,0));
+        } else if(cars.get(position).getFuel() < 0.75){
+            holder.fuelOfCar.setTextColor(Color.rgb(255,140,0));
+        } else {
+            holder.fuelOfCar.setTextColor(Color.rgb(61,182,66));
+        }
+
         String color = cars.get(position).getColor();
         switch (cars.get(position).getType()) {
             case "Scala":
