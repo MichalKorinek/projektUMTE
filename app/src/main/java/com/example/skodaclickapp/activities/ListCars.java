@@ -1,34 +1,34 @@
-package com.example.skodaclickapp;
+package com.example.skodaclickapp.activities;
+
+import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
+import com.example.skodaclickapp.R;
+import com.example.skodaclickapp.ReadCsvData;
 import com.example.skodaclickapp.model.Car;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class ListCars extends AppCompatActivity {
 
 
     private List<Car> cars;
-    private ReadCsvData readCsvData = new ReadCsvData();
+    private final ReadCsvData readCsvData = new ReadCsvData();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_cars);
+        hideTitle();
         readData();
         setText();
-
     }
 
     private void readData(){
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setText() {
-        TextView textView = findViewById(R.id.csvData);
+        TextView textView = findViewById(R.id.csvTest);
         String text = "";
         for (int i = 0; i < cars.size(); i++) {
             text += cars.get(i).toString();
@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(text);
     }
 
-
-
+    private void hideTitle(){
+        Objects.requireNonNull(getSupportActionBar()).hide();
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
 }
