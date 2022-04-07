@@ -34,8 +34,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openQrReader() {
-        Intent intent = new Intent(this, CameraReader.class);
-        startActivity(intent);
+        if(checkCameraPermission()){
+            Intent intent = new Intent(this, CameraReader.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, SettingsAndPermissions.class);
+            startActivity(intent);
+        }
+
     }
 
     private void openSettings() {
@@ -57,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checkStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else return false;
+    }
+
+    private boolean checkCameraPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else return false;
     }
