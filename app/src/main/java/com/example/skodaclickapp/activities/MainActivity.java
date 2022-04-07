@@ -21,12 +21,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         hideTitle();
         setContentView(R.layout.activity_main);
+
         ImageButton listCars = findViewById(R.id.listCars);
         listCars.setOnClickListener(view -> openListCarsActivity());
 
         ImageButton permissions = findViewById(R.id.permissions);
         permissions.setOnClickListener(view -> openSettings());
 
+        ImageButton scanQR = findViewById(R.id.scanQR);
+        scanQR.setOnClickListener(view -> openQrReader());
+
+    }
+
+    private void openQrReader() {
+        Intent intent = new Intent(this, CameraReader.class);
+        startActivity(intent);
     }
 
     private void openSettings() {

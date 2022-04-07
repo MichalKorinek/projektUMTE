@@ -61,14 +61,8 @@ public class DetailOfCar extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void readData(String id) throws IOException {
-        int dataFile = 0;
-        File[] file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).listFiles();
-        for (int i = 0; i < file.length; i++) {
-            if (file[i].getName().equals("data")) {
-                dataFile = i;
-            }
-        }
-        InputStream is = new FileInputStream(file[dataFile]);
+        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        InputStream is = new FileInputStream(new File(file, "data.csv"));
         ReadCsvData readCsvData = new ReadCsvData();
         Car car = readCsvData.readDataById(is, id);
 
