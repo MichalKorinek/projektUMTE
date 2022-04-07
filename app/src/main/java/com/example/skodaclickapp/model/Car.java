@@ -90,4 +90,8 @@ public class Car {
                 ", fuelCard=" + fuelCard +
                 '\n' + "\n";
     }
+
+    public String[] toArray(){
+        return new String[]{getId() + "", getType(), getColor(), getSpz() + "", getFuel() + "", getDescription(), getFuelCard() + ""};
+    }
 }

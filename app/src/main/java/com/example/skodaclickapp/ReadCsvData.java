@@ -16,7 +16,7 @@ public class ReadCsvData {
         List<Car> cars = new ArrayList<>();
         String line;
         while((line = br.readLine()) != null){
-            String[] tokens = line.split(";");
+            String[] tokens = line.split(",");
             Car car = new Car();
             if(!tokens[0].equals("carNumber")){
                 car.setId(Integer.parseInt(tokens[0]));
@@ -37,7 +37,7 @@ public class ReadCsvData {
         String line;
         Car car = new Car();
         while((line = br.readLine()) != null){
-            String[] tokens = line.split(";");
+            String[] tokens = line.split(",");
             if(tokens[0].equals(id)){
                 car.setId(Integer.parseInt(tokens[0]));
                 car.setType(tokens[1]);
