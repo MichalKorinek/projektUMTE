@@ -1,5 +1,8 @@
 package com.example.skodaclickapp;
 
+import android.widget.Toast;
+
+import com.example.skodaclickapp.activities.DetailOfCar;
 import com.example.skodaclickapp.model.Car;
 
 import java.io.BufferedReader;
@@ -36,6 +39,7 @@ public class ReadCsvData {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String line;
         Car car = new Car();
+        boolean found = false;
         while((line = br.readLine()) != null){
             String[] tokens = line.split(",");
             if(tokens[0].equals(id)){
@@ -46,8 +50,13 @@ public class ReadCsvData {
                 car.setFuel(Float.parseFloat(tokens[4]));
                 car.setDescription(tokens[5]);
                 car.setFuelCard(Integer.parseInt(tokens[6]));
+                found = true;
             }
         }
+        if (!found) {
+            car.setId(40400404);
+        }
         return car;
+
     }
 }

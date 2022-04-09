@@ -65,60 +65,68 @@ public class DetailOfCar extends AppCompatActivity {
         InputStream is = new FileInputStream(new File(file, "data.csv"));
         ReadCsvData readCsvData = new ReadCsvData();
         Car car = readCsvData.readDataById(is, id);
+        if(car.getId() == 40400404){
+            Toast.makeText(DetailOfCar.this, "Automobil nebyl nalezen!", Toast.LENGTH_SHORT).show();
+            openListCarsActivity();
 
-
-        TextView idOfCarDetailed = findViewById(R.id.idOfCarDetailed);
-        idOfCarDetailed.setText("ID: " + car.getId());
-        TextView spzTextView = findViewById(R.id.spzTextView);
-        spzTextView.setText("SPZ: " + car.getSpz());
-        TextView detailTypeOfCar = findViewById(R.id.detailTypeOfCar);
-        detailTypeOfCar.setText("ŠKODA " + car.getType());
-        ImageView imageView = findViewById(R.id.detailImageView);
-        switch (car.getType()) {
-            case "Scala":
-                if (car.getColor().equals("red")) {
-                    imageView.setImageResource(R.drawable.scala_red);
-                } else if (car.getColor().equals("blue")) {
-                    imageView.setImageResource(R.drawable.scala_blue);
-                } else {
+        } else {
+            TextView idOfCarDetailed = findViewById(R.id.idOfCarDetailed);
+            idOfCarDetailed.setText("ID: " + car.getId());
+            TextView spzTextView = findViewById(R.id.spzTextView);
+            spzTextView.setText("SPZ: " + car.getSpz());
+            TextView detailTypeOfCar = findViewById(R.id.detailTypeOfCar);
+            detailTypeOfCar.setText("ŠKODA " + car.getType());
+            ImageView imageView = findViewById(R.id.detailImageView);
+            switch (car.getType()) {
+                case "Scala":
+                    if (car.getColor().equals("red")) {
+                        imageView.setImageResource(R.drawable.scala_red);
+                    } else if (car.getColor().equals("blue")) {
+                        imageView.setImageResource(R.drawable.scala_blue);
+                    } else {
+                        imageView.setImageResource(R.drawable.scala_white);
+                    }
+                    break;
+                case "Octavia":
+                    if (car.getColor().equals("blue")) {
+                        imageView.setImageResource(R.drawable.octavia_blue);
+                    } else if (car.getColor().equals("green")) {
+                        imageView.setImageResource(R.drawable.octavia_green);
+                    } else if (car.getColor().equals("grey")) {
+                        imageView.setImageResource(R.drawable.octavia_grey);
+                    } else {
+                        imageView.setImageResource(R.drawable.octavia_white);
+                    }
+                    break;
+                case "KamiQ":
+                    if (car.getColor().equals("black")) {
+                        imageView.setImageResource(R.drawable.kamiq_black);
+                    } else {
+                        imageView.setImageResource(R.drawable.kamiq_red);
+                    }
+                    break;
+                default:
                     imageView.setImageResource(R.drawable.scala_white);
-                }
-                break;
-            case "Octavia":
-                if (car.getColor().equals("blue")) {
-                    imageView.setImageResource(R.drawable.octavia_blue);
-                } else if (car.getColor().equals("green")) {
-                    imageView.setImageResource(R.drawable.octavia_green);
-                } else if (car.getColor().equals("grey")) {
-                    imageView.setImageResource(R.drawable.octavia_grey);
-                } else {
-                    imageView.setImageResource(R.drawable.octavia_white);
-                }
-                break;
-            case "KamiQ":
-                if (car.getColor().equals("black")) {
-                    imageView.setImageResource(R.drawable.kamiq_black);
-                } else {
-                    imageView.setImageResource(R.drawable.kamiq_red);
-                }
-                break;
-            default:
-                imageView.setImageResource(R.drawable.scala_white);
+
+            }
+
+            EditText fuelEditText = findViewById(R.id.fuelEditText);
+            fuelEditText.setText((car.getFuel() * 100) + " %");
+            EditText descriptionEditText = findViewById(R.id.descriptionEditText);
+            if (car.getDescription().equals("")) {
+                descriptionEditText.setText(" ");
+            } else descriptionEditText.setText(car.getDescription());
+
+
+            TextView fuelCardIdDetail = findViewById(R.id.fuelCardIdDetail);
+            fuelCardIdDetail.setText("Tankovací karta č. " + car.getFuelCard());
+            TextView colorDetail = findViewById(R.id.colorDetail);
+            colorDetail.setText("Barva vozu: " + car.getColor());
 
         }
 
-        EditText fuelEditText = findViewById(R.id.fuelEditText);
-        fuelEditText.setText((car.getFuel() * 100) + " %");
-        EditText descriptionEditText = findViewById(R.id.descriptionEditText);
-        if (car.getDescription().equals("")) {
-            descriptionEditText.setText(" ");
-        } else descriptionEditText.setText(car.getDescription());
 
 
-        TextView fuelCardIdDetail = findViewById(R.id.fuelCardIdDetail);
-        fuelCardIdDetail.setText("Tankovací karta č. " + car.getFuelCard());
-        TextView colorDetail = findViewById(R.id.colorDetail);
-        colorDetail.setText("Barva vozu: " + car.getColor());
 
     }
 
